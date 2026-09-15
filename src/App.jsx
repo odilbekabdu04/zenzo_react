@@ -1,15 +1,13 @@
-import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
-import SplashScreen from './components/SplashScreen';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Market from './pages/Market';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
-import SuperAdminLogin from './pages/SuperAdminLogin';
+import SuperAdminLogin from './pages/SuperAdminLogin';   // ✅ BU IMPORT SHART
 import Users from './pages/dashboard/Users';
 import Products from './pages/dashboard/Products';
 import Orders from './pages/dashboard/Orders';
@@ -18,27 +16,6 @@ import Settings from './pages/dashboard/Settings';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  const [showSplash, setShowSplash] = useState(false);
-
-  useEffect(() => {
-    // Sessiyada bir marta ko'rsatamiz
-    const seen = sessionStorage.getItem('zenzo_splash_shown');
-    if (!seen) {
-      setShowSplash(true);
-    }
-  }, []);
-
-  const handleSplashFinish = () => {
-    sessionStorage.setItem('zenzo_splash_shown', 'true');
-    setShowSplash(false);
-  };
-
-  // Splash ko'rsatish
-  if (showSplash) {
-    return <SplashScreen onFinish={handleSplashFinish} />;
-  }
-
-  // Asosiy ilova
   return (
     <AuthProvider>
       <CartProvider>
@@ -47,8 +24,11 @@ function App() {
             <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+
+            {/* 🔐 SUPER ADMIN LOGIN ROUTE */}
             <Route path="/super-admin" element={<SuperAdminLogin />} />
 
+            {/* DASHBOARD */}
             <Route
               path="/dashboard"
               element={
@@ -66,6 +46,7 @@ function App() {
               <Route path="settings" element={<Settings />} />
             </Route>
 
+            {/* MARKET */}
             <Route
               path="/market"
               element={
