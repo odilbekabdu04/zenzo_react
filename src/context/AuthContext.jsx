@@ -24,22 +24,19 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // ============================================
-  // ODDIY USER LOGIN (email + parol)
-  // ============================================
-  const login = async (email, password) => {
-    const res = await API.post('/login/', { email, password });
+const login = async (username, password) => {
+  const res = await API.post('/login/', { username, password });
 
-    const userData = { ...res.data.user, role: res.data.role };
+  const userData = { ...res.data.user, role: res.data.role };
 
-    localStorage.setItem('access_token', res.data.access);
-    localStorage.setItem('refresh_token', res.data.refresh);
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('role', res.data.role);
+  localStorage.setItem('access_token', res.data.access);
+  localStorage.setItem('refresh_token', res.data.refresh);
+  localStorage.setItem('user', JSON.stringify(userData));
+  localStorage.setItem('role', res.data.role);
 
-    setUser(userData);
-    return res.data;
-  };
+  setUser(userData);
+  return res.data;
+};
 
   // ============================================
   // 🔐 ADMIN LOGIN (username + parol)

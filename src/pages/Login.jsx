@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import '../styles/auth.css';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -17,17 +17,11 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const data = await login(email, password);
-
-      // ✅ Rolga qarab yo'naltirish
-      if (data.role === 'admin') {
-        navigate('/dashboard');   // Admin panel
-      } else {
-        navigate('/market');       // Onlayn do'kon
-      }
+      await login(username, password);
+      navigate('/dashboard/overview');
     } catch (err) {
       const data = err && err.response ? err.response.data : {};
-      const msg = data.error || data.detail || "Email yoki parol noto'g'ri!";
+      const msg = data.error || data.detail || "Username yoki parol noto'g'ri!";
       setError(msg);
     } finally {
       setLoading(false);
@@ -48,12 +42,13 @@ export default function Login() {
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Email</label>
+              <label>Username</label>
               <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="email@example.com"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username kiriting"
+                autoComplete="username"
                 required
               />
             </div>
@@ -65,12 +60,13 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Parolingizni kiriting"
+                autoComplete="current-password"
                 required
               />
             </div>
 
             <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? 'Kirish...' : 'Kirish'}
+              {loading ? 'Kirish...' : 'KIRISH'}
             </button>
           </form>
 
