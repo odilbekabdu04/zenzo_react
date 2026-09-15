@@ -399,12 +399,10 @@ export default function Market() {
 
                     <div className="user-menu">
                         <div className="user-avatar">
-                            {(user?.fullname || user?.username || 'U')
-                                .charAt(0)
-                                .toUpperCase()}
+                            {(user?.username || 'U').charAt(0).toUpperCase()}
                         </div>
                         <div className="user-info">
-                            <b>{user?.fullname || user?.username}</b>
+                            <b>{user?.username || user?.email}</b>
                             <button onClick={handleLogout}>
                                 Chiqish <FontAwesomeIcon icon={faArrowRight} />
                             </button>

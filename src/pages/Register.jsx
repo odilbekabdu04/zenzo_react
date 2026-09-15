@@ -6,7 +6,6 @@ import '../styles/auth.css';
 export default function Register() {
   const [form, setForm] = useState({
     username: '',
-    fullname: '',
     email: '',
     password: '',
     confirm_password: '',
@@ -26,7 +25,6 @@ export default function Register() {
     setError('');
     setSuccess('');
 
-    // Frontend validatsiya
     if (!form.username.trim()) {
       setError("Username kiriting!");
       return;
@@ -34,11 +32,6 @@ export default function Register() {
 
     if (form.username.length < 3) {
       setError("Username kamida 3 ta belgidan iborat bo'lishi kerak!");
-      return;
-    }
-
-    if (!form.fullname.trim()) {
-      setError("To'liq ismni kiriting!");
       return;
     }
 
@@ -86,7 +79,6 @@ export default function Register() {
           {success && <div className="success-msg show">{success}</div>}
 
           <form onSubmit={handleSubmit}>
-            {/* USERNAME — YANGI */}
             <div className="form-group">
               <label>Username</label>
               <input
@@ -101,21 +93,6 @@ export default function Register() {
               />
             </div>
 
-            {/* TO'LIQ ISM */}
-            <div className="form-group">
-              <label>To'liq ism</label>
-              <input
-                type="text"
-                name="fullname"
-                value={form.fullname}
-                onChange={handleChange}
-                placeholder="Ism Familiya"
-                autoComplete="name"
-                required
-              />
-            </div>
-
-            {/* EMAIL */}
             <div className="form-group">
               <label>Email</label>
               <input
@@ -129,7 +106,6 @@ export default function Register() {
               />
             </div>
 
-            {/* PAROL */}
             <div className="form-group">
               <label>Parol</label>
               <input
@@ -144,7 +120,6 @@ export default function Register() {
               />
             </div>
 
-            {/* TASDIQLASH */}
             <div className="form-group">
               <label>Parolni tasdiqlash</label>
               <input

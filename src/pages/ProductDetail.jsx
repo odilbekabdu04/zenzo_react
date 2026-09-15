@@ -219,7 +219,7 @@ export default function ProductDetail() {
             {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
           </Link>
           <div className="user-avatar-mini" onClick={handleLogout}>
-            {(user?.fullname || user?.username || 'U').charAt(0).toUpperCase()}
+            {(user?.username || 'U').charAt(0).toUpperCase()}
           </div>
         </div>
       </header>
